@@ -9,8 +9,17 @@ evaluator finding the gap themselves.
 
 ```bash
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=your_key_here   # or paste it into the Streamlit sidebar
+export GEMINI_API_KEY=your_key_here   # or paste it into the Streamlit sidebar
 ```
+Get a free key at https://aistudio.google.com/apikey
+
+**Note on free-tier limits:** Gemini's free tier caps requests per minute
+*and* per day (the daily cap for some models has been as low as 20
+requests). Since a single question can use several LLM calls, running
+`eval_set.py` across many questions can hit this — `agent.py` auto-retries
+on rate-limit (429) and server-overload (503) errors, but a daily quota
+exhaustion won't resolve until it resets. Budget your testing accordingly
+before a live viva demo.
 
 Test arXiv connectivity first, separately from the LLM parts:
 ```bash
